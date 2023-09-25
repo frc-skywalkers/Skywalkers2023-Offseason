@@ -4,6 +4,11 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.led.CANdle;
+import com.ctre.phoenix.led.CANdle.LEDStripType;
+import com.ctre.phoenix.led.CANdleConfiguration;
+import com.ctre.phoenix.led.RainbowAnimation;
+
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -13,9 +18,8 @@ import frc.robot.lightstrip.LedState;
 import frc.robot.lightstrip.TempLedState;
 
 public class Lightstrip extends SubsystemBase {
-  private PWM redOutput = new PWM(lightstripConstants.redPort);
-  private PWM greenOutput = new PWM(lightstripConstants.greenPort);
-  private PWM blueOutput = new PWM(lightstripConstants.bluePort);
+  CANdle candle = new CANdle(lightstripConstants.candlePort);
+  RainbowAnimation rainbowAnim = new RainbowAnimation(1, 0.5, lightstripConstants.ledCount + 8);
 
   private LedState defaultColor = lightstripConstants.defaultState;
   private Timer defaultTimer = new Timer();
@@ -24,14 +28,27 @@ public class Lightstrip extends SubsystemBase {
   private TempLedState tempColor = null;
   private Timer tempTimer = new Timer();
 
+  private boolean isDefault = false;
+
   /** Creates a new Lightstrip. */
   public Lightstrip() {
     defaultTimer.reset();
     defaultTimer.start();
+
+    isDefault = false;
+
+    CANdleConfiguration config = new CANdleConfiguration();
+    config.stripType = LEDStripType.RGB;
+    config.brightnessScalar = 0.75;
+    candle.configAllSettings(config); 
   }
 
   @Override
   public void periodic() {
+    if(isDefault) {
+      return;
+    }
+
     if(tempColor != null) {
       if(tempColor.getSeconds() < tempTimer.get()) {
         tempColor = null;
@@ -45,10 +62,6 @@ public class Lightstrip extends SubsystemBase {
       update(defaultColor, defaultTimer);
     }
 
-    SmartDashboard.putNumber("Red", redOutput.getRaw());
-    SmartDashboard.putNumber("Green", greenOutput.getRaw());
-    SmartDashboard.putNumber("Blue", blueOutput.getRaw());
-
     if(currentColor != null) {
       SmartDashboard.putNumberArray("Current", currentColor.getState());
     }
@@ -58,12 +71,19 @@ public class Lightstrip extends SubsystemBase {
     }
   }
 
+  public void setDefault(boolean defaultState) {
+    isDefault = defaultState;
+
+    if(isDefault) {
+      candle.animate(rainbowAnim);
+    }
+  }
+
   private LedState toLedState(TempLedState state) {
     return new LedState(state.getRed(), state.getGreen(), state.getBlue(), state.getEffect());
   }
 
   private void update(LedState state, Timer timer) {
-    double secondCycle = timer.get() % 1 - 0.50;
     SmartDashboard.putNumber("Timer", timer.get() % 1 - 0.50 * state.getRed());
     if(state.getEffect() == "Solid") {
       setColor(state.getRed(), state.getGreen(), state.getBlue());
@@ -119,8 +139,6 @@ public class Lightstrip extends SubsystemBase {
   }
 
   private void setColor(int red, int green, int blue) {
-    redOutput.setRaw(red);
-    greenOutput.setRaw(green);
-    blueOutput.setRaw(blue);
+    candle.setLEDs(red, green, blue, 0, 0, lightstripConstants.ledCount + 8);
   }
 }

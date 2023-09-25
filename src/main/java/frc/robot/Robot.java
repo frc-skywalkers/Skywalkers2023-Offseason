@@ -55,6 +55,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     m_robotContainer.elevator.disable();
+    m_robotContainer.lightstrip.setDefault(true);
   }
 
   @Override

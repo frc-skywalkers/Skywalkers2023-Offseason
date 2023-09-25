@@ -432,9 +432,8 @@ public final class Constants {
     }
 
     public static final class lightstripConstants {
-        public static int redPort = 1;
-        public static int greenPort = 2;
-        public static int bluePort = 0;
+        public static int candlePort = 0;
+        public static int ledCount = 150;
 
         public static LedState defaultState = new LedState(255, 0, 0, "Solid");
         public static TempLedState successSignal = new TempLedState(0, 255, 0, "Solid", 2);

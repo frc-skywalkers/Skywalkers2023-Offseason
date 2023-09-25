@@ -42,7 +42,7 @@ public class RobotContainer {
     private final Swerve s_Swerve = new Swerve();
     public final ProfiledPIDElevator elevator = new ProfiledPIDElevator();
     public final ArmSubsystem arm = new ArmSubsystem();
-    private final Lightstrip lightstrip = new Lightstrip();
+    public final Lightstrip lightstrip = new Lightstrip();
     private final IntakeSubsystem intake = new IntakeSubsystem(lightstrip);
     private final Limelight limelight = new Limelight();
     /* Controllers */
