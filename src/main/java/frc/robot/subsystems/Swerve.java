@@ -82,6 +82,21 @@ public class Swerve extends SubsystemBase {
         swerveOdometry.resetPosition(getYaw(), getModulePositions(), pose);
     }
 
+    public void stopModules() {
+        SwerveModuleState[] swerveModuleStates =
+            Constants.Swerve.swerveKinematics.toSwerveModuleStates(
+                new ChassisSpeeds(
+                                    0, 
+                                    0, 
+                                    0)
+                                );
+        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
+
+        for(SwerveModule mod : mSwerveMods){
+            mod.setDesiredState(swerveModuleStates[mod.moduleNumber], true); //true or false idk
+        }
+    }
+
     public SwerveModuleState[] getModuleStates(){
         SwerveModuleState[] states = new SwerveModuleState[4];
         for(SwerveModule mod : mSwerveMods){
@@ -102,8 +117,20 @@ public class Swerve extends SubsystemBase {
         gyro.setYaw(0);
     }
 
+    public void setHeading(double Angle){
+        gyro.setYaw(Angle);
+    }
+
     public Rotation2d getYaw() {
         return (Constants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - gyro.getYaw()) : Rotation2d.fromDegrees(gyro.getYaw());
+    }
+
+    public double getYawDouble() {
+        return (Constants.Swerve.invertGyro) ? (360 - gyro.getYaw()) : (gyro.getYaw());
+    }
+
+    public double getRoll() {
+        return (Constants.Swerve.invertGyro) ? (360 - gyro.getRoll()) : (gyro.getRoll());
     }
 
     public void resetModulesToAbsolute(){
