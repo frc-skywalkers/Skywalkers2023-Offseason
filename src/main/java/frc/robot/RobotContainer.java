@@ -43,7 +43,8 @@ public class RobotContainer {
     public final ProfiledPIDElevator elevator = new ProfiledPIDElevator();
     public final ArmSubsystem arm = new ArmSubsystem();
     private final Lightstrip lightstrip = new Lightstrip();
-    private final IntakeSubsystem intake = new IntakeSubsystem(lightstrip);
+    private final TofSubsystem tof = new TofSubsystem();
+    private final IntakeSubsystem intake = new IntakeSubsystem(lightstrip, tof);
     private final Limelight limelight = new Limelight();
     /* Controllers */
     private final Joystick driver = new Joystick(0);

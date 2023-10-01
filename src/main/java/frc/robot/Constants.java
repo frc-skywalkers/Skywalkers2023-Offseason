@@ -442,6 +442,28 @@ public final class Constants {
         public static LedState cubeIntake = new LedState(195, 0, 255, "Solid");
     }
 
+    public static final class TofConstants {
+        public static final int secondaryPort = 16;
+        public static final int primaryPort = 15;
+
+        public static final boolean secondaryMode = true; //true for cone, false for cube
+
+        public static final class width { //precise for alignment
+            public static final double cube = 10;
+            public static final double cone = 5;
+        }
+
+        public static final class full { //inprecise to just tell if cube or cone is inside
+            public static final double cube = 30;
+            public static final double cone = 5;
+        }
+
+        public static final class halfway {
+            public static final double cube = 15;
+            public static final double cone = 15;
+        }
+    }
+
     public static final class AutoConstants { //TODO: The below constants are used in the example auto, and must be tuned to specific robot
         public static final double kMaxSpeedMetersPerSecond = 3;
         public static final double kMaxAccelerationMetersPerSecondSquared = 3;

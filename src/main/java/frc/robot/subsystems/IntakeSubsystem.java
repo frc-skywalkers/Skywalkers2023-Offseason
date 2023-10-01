@@ -28,6 +28,7 @@ public class IntakeSubsystem extends SubsystemBase {
   public boolean outtake = false;
 
   private final Lightstrip lightstrip;
+  private final TofSubsystem tof;
 
   public enum Mode {
     CONE(-1),
@@ -40,9 +41,10 @@ public class IntakeSubsystem extends SubsystemBase {
     }
   }
 
-  public IntakeSubsystem(Lightstrip rLightstrip) {
+  public IntakeSubsystem(Lightstrip rLightstrip, TofSubsystem rTof) {
     intake.configFactoryDefault();
     lightstrip = rLightstrip;
+    tof = rTof;
   }
 
   // just speed should be fine, motor voltage unecessary
@@ -83,14 +85,26 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public boolean intakeEmpty() {
-    return getActualVelocity() > IntakeConstants.threshold(intakeSpeed);
+    if(mode == Mode.CONE) {
+      return !tof.isConeHeld();
+    } else {
+      if(tof.isCubeTofOn()) {
+        return !tof.isConeHeld();
+      } else {
+        return getActualVelocity() > IntakeConstants.threshold(intakeSpeed);
+      }
+    }
   }
 
   public boolean pieceHeld() {
     if(mode == Mode.CONE) {
-      return getActualVelocity() < IntakeConstants.conePieceHeldThreshold;
+      return tof.isConeHeld();
     } else {
-      return getActualVelocity() < IntakeConstants.cubePieceHeldThreshold;
+      if(tof.isCubeTofOn()) {
+        return tof.isConeHeld();
+      } else {
+        return getActualVelocity() < IntakeConstants.cubePieceHeldThreshold;
+      }
     }
   }
 
