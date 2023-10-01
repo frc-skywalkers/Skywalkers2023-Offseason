@@ -161,7 +161,7 @@ public final class Constants {
     }
 
     public static final class Presets {
-        public static final Preset STOW_PRESET = new Preset(1.6, 0); // done
+        public static final Preset STOW_PRESET = new Preset(2.35, 0); // done
         public static final Preset GROUND_INTAKE_PRESET = new Preset(-0.19, 0.10); // don't use
         public static final Preset GROUND_INTAKE_CONE_PRESET = new Preset(0.22, 0);     
         public static final Preset GROUND_INTAKE_CUBE_PRESET = new Preset(0.1, 0.01); // done
@@ -273,7 +273,7 @@ public final class Constants {
 
     public static final class IntakeConstants {
         public static final int kIntakePort = 22; // ??
-        public static final double kMaxIntakeSpeed = 0.8; // ??
+        public static final double kMaxIntakeSpeed = 0.4; // ??
         public static final double kMaxOuttakeSpeed = -0.3; // ??
         public static final double kHoldSpeed = 0.08;
 
@@ -281,7 +281,7 @@ public final class Constants {
         public static double kOutFailTime = 0.75; //seconds it tries to outtake
 
         public static double conePieceHeldThreshold = 500;
-        public static double cubePieceHeldThreshold = 750;
+        public static double cubePieceHeldThreshold = 30;
         public static boolean differentialIntake = true;
         public static int tofPort = 15;
     
@@ -295,7 +295,7 @@ public final class Constants {
         public static final int kLeftElevatorPort = 31;
         public static final int kRightElevatorPort = 30; 
 
-        public static final double kMaxElevatorSpeed = 0.4;
+        public static final double kMaxElevatorSpeed = 0.2; //0.4
         public static final boolean kLeftElevatorInverted = false;
         public static final boolean kRightElevatorInverted = true;
         public static final int kelevatorTicksPerRotation = 2048;
@@ -309,8 +309,8 @@ public final class Constants {
         public static final double kBottomLimit = 0.0;
         public static final double kTopLimit = 1.45;
 
-        public static final double kMaxVel = 1.5;
-        public static final double kMaxAcc = 1.0;
+        public static final double kMaxVel = 0.75; //1.5
+        public static final double kMaxAcc = 0.5; //1.0
 
         public static final double kVUp = 6.17;
         public static final double kSUp = 0.999;
@@ -320,7 +320,7 @@ public final class Constants {
     
     
 
-        public static final double kP = 30.00;
+        public static final double kP = 30.00; //30.00
         public static final double kI = 0.00;
         public static final double kD = 0.00;
 
@@ -335,21 +335,21 @@ public final class Constants {
         public static final int kArmPort = 23; // ???
         public static final int kArmAbsoluteEncoderPort = 16;
         public static final double kMaxArmSpeed = 0.25; // ??
-        public static final boolean kArmInverted = true; // ??
+        public static final boolean kArmInverted = false; // ??
         public static final boolean kArmAbsEncoderInverted = false;
         // public static final boolean kEncoderInverted = true;
     
         public static final int kArmTicksPerRotation = 2048; // ??
         public static final double kArmGearRatio = 45.0 * 44.0 / 18.0;
 
-        public static final double kAbsEncoderOffset = -73.5;
+        public static final double kAbsEncoderOffset = 0;
 
 
         public static final double kPositionConversionFactor = 2 * Math.PI / (kArmTicksPerRotation * kArmGearRatio);
         public static final double kVelocityConversionFactor = kPositionConversionFactor * 10.0;
 
-        public static final double kBottomLimit = -0.3; 
-        public static final double kTopLimit = 1.85; 
+        public static final double kBottomLimit = -20; 
+        public static final double kTopLimit = 20; 
 
         // feedback
 

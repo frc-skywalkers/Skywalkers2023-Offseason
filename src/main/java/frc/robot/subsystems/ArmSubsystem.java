@@ -22,10 +22,10 @@ import frc.robot.Constants.NewArmConstants;
 
 public class ArmSubsystem extends ProfiledPIDSubsystem {
 
-  private final WPI_TalonFX armMotor = new WPI_TalonFX(NewArmConstants.kArmPort, "CANivore");
+  private final WPI_TalonFX armMotor = new WPI_TalonFX(NewArmConstants.kArmPort);
 
   // WPI_TalonFX armMotor = new WPI_TalonFX(ArmConstants.kArmPort, "CANivore");
-  private final CANCoder absoluteEncoder = new CANCoder(NewArmConstants.kArmAbsoluteEncoderPort, "CANivore");
+  private final CANCoder absoluteEncoder = new CANCoder(NewArmConstants.kArmAbsoluteEncoderPort);
 
   public ArmSubsystem() {
     super(
@@ -46,7 +46,7 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
 
     absoluteEncoder.configSensorDirection(NewArmConstants.kArmAbsEncoderInverted);
     // absoluteEncoder.configMagnetOffset(NewArmConstants.kAbsEncoderOffset);
-    absoluteEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
+    absoluteEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Unsigned_0_to_360);
 
     resetEncoders();
     disable();
@@ -109,13 +109,19 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
     armMotor.setVoltage(voltage);
   }
 
+
   public void setSpeed(double speed) {
+    System.out.println(speed);
     speed = MathUtil.clamp(speed, -NewArmConstants.kMaxArmSpeed, NewArmConstants.kMaxArmSpeed);
-    armMotor.set(speed + 0.0155);
-    if (getPosition() > NewArmConstants.kTopLimit && speed > 0) {
+    if (getPosition() > 3.5 && getPosition() < 4.7) {
+      speed -=  0.0625;
+    }
+    
+    armMotor.set(speed);
+    if (getPosition() > NewArmConstants.kTopLimit && speed < 0) {
       armMotor.stopMotor();
     }
-    if (getPosition() < NewArmConstants.kBottomLimit && speed < 0) {
+    if (getPosition() < NewArmConstants.kBottomLimit && speed > 0) {
       armMotor.stopMotor();
     }
     Dashboard.Arm.Debugging.putNumber("New Arm Speed", speed);

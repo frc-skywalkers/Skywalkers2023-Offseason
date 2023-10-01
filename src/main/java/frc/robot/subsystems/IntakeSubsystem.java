@@ -21,7 +21,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   private final boolean differentialIntake = IntakeConstants.differentialIntake;
 
-  private final WPI_TalonFX intake = new WPI_TalonFX(IntakeConstants.kIntakePort, "CANivore");
+  private final WPI_TalonFX intake = new WPI_TalonFX(IntakeConstants.kIntakePort);
   private double intakeSpeed = 0;
   public boolean stop = false;
 
@@ -88,9 +88,9 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public boolean pieceHeld() {
     if(mode == Mode.CONE) {
-      return getActualVelocity() < IntakeConstants.conePieceHeldThreshold;
+      return getActualCurrent() > IntakeConstants.conePieceHeldThreshold;
     } else {
-      return getActualVelocity() < IntakeConstants.cubePieceHeldThreshold;
+      return getActualCurrent() > IntakeConstants.cubePieceHeldThreshold;
     }
   }
 

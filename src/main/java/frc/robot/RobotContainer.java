@@ -69,6 +69,7 @@ public class RobotContainer {
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
         startDashboard();
+        /*
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
                 s_Swerve, 
@@ -78,13 +79,14 @@ public class RobotContainer {
                 () -> robotCentric.getAsBoolean()
             )
         );
+        */
         elevator.setDefaultCommand(Commands.run(() -> {
             double speed = -operatorJoystick.getLeftY() * ElevatorConstants.kMaxElevatorSpeed;
             elevator.setSpeed(speed);
           }, elevator).unless(elevator::isEnabled));
         
         arm.setDefaultCommand(Commands.run(() -> {
-            double speed = -operatorJoystick.getRightY() * NewArmConstants.kMaxArmSpeed;
+            double speed = operatorJoystick.getRightY() * NewArmConstants.kMaxArmSpeed;
             speed = Math.abs(speed) > OIConstants.kDeadband ? speed : 0.0;
             arm.setSpeed(speed);
             }, arm).unless(arm::isEnabled));
@@ -134,10 +136,11 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
+        
         /* Driver Buttons */
         // zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
 
-        driverJoystick.y().onTrue(Commands.runOnce(() -> s_Swerve.zeroGyro(), s_Swerve));
+        //driverJoystick.y().onTrue(Commands.runOnce(() -> s_Swerve.zeroGyro(), s_Swerve));
 
         //driverJoystick.b().onTrue(Commands.runOnce(() -> swerve.toggleField(), swerve));
 
@@ -149,6 +152,7 @@ public class RobotContainer {
         //driverJoystick.rightBumper().onTrue(Commands.runOnce(swerve::stopModules, swerve));
 
         // // Right Trigger --> manual override
+        /*
         operatorJoystick.rightTrigger().onTrue(
             Commands.runOnce(() -> {
             arm.stop();
@@ -217,6 +221,53 @@ public class RobotContainer {
         operatorJoystick.back().onTrue(Commands.runOnce(() -> intake.stop(), intake));
 
         // driverJoystick.a().onTrue(Commands.run(() -> swerve.drive(1.00, 0.000, 0.000), swerve));
+        */
+        //operatorJoystick.a().onTrue(Commands.runOnce(() -> intake.setSpeed(0.5), intake)); //intake.stop()
+
+        // operatorJoystick.a().onTrue(Commands.runOnce(() -> macros.moveToPreset(0.373, 0)));
+        operatorJoystick.rightTrigger().onTrue(
+            Commands.runOnce(() -> {
+            arm.stop();
+            arm.disable();
+            elevator.stop();
+            elevator.disable();
+        }, arm, elevator));
+
+        operatorJoystick.start().onTrue(macros.home());
+
+        operatorJoystick.x().onTrue(
+            macros.general2ndStage()
+        );
+
+        operatorJoystick.y().onTrue(
+            macros.general3rdStage()
+        );
+
+        operatorJoystick.b().onTrue(
+            macros.setCubeMode()
+        );
+
+        operatorJoystick.a().onTrue(
+            macros.setConeMode()
+        );
+
+
+        operatorJoystick.povUp().onTrue(
+            macros.substationIntake()
+        );
+        operatorJoystick.povDown().onTrue(
+            macros.stow()
+        );
+        operatorJoystick.povLeft().onTrue(
+            macros.groundIntake()
+        );
+        
+        operatorJoystick.leftBumper().onTrue(
+            macros.outtake()
+        );
+        operatorJoystick.rightBumper().onTrue(
+            macros.intake(lightstrip)
+        );
   }
 
     /**
