@@ -30,8 +30,8 @@ public class IntakeSubsystem extends SubsystemBase {
   private final Lightstrip lightstrip;
 
   public enum Mode {
-    CONE(-1),
-    CUBE(1);
+    CONE(1),
+    CUBE(-1);
 
     public int multiplier;
 

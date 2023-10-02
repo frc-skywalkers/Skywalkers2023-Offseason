@@ -70,8 +70,8 @@ public class Macros {
 
   public CommandBase stow() {
     return moveToPreset(
-      Presets.STOW_PRESET.kElevatorPos, 
-      Presets.STOW_PRESET.kArmPos);
+      Presets.STOW_PRESET
+      );
   }
 
   public CommandBase setCubeMode() {
@@ -170,26 +170,22 @@ public class Macros {
 
   public CommandBase cube2ndStage() {
     return moveToPreset(
-      Presets.CUBE_2ND_STAGE_PRESET.kElevatorPos, 
-      Presets.CUBE_2ND_STAGE_PRESET.kArmPos);
+      Presets.CUBE_2ND_STAGE_PRESET);
   }
 
   public CommandBase cube3rdStage() {
     return moveToPreset(
-      Presets.CUBE_3RD_STAGE_PRESET.kElevatorPos, 
-      Presets.CUBE_3RD_STAGE_PRESET.kArmPos);
+      Presets.CUBE_3RD_STAGE_PRESET);
   }
 
   public CommandBase cone2ndStage() {
     return moveToPreset(
-      Presets.CONE_2ND_STAGE_PRESET.kElevatorPos, 
-      Presets.CONE_2ND_STAGE_PRESET.kArmPos);
+      Presets.CONE_2ND_STAGE_PRESET);
   }
 
   public CommandBase cone3rdStage() {
     return moveToPreset(
-      Presets.CONE_3RD_STAGE_PRESET.kElevatorPos, 
-      Presets.CONE_3RD_STAGE_PRESET.kArmPos);
+      Presets.CONE_3RD_STAGE_PRESET);
   }
 
   public CommandBase intake() {

@@ -69,7 +69,6 @@ public class RobotContainer {
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
         startDashboard();
-        /*
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
                 s_Swerve, 
@@ -79,7 +78,6 @@ public class RobotContainer {
                 () -> robotCentric.getAsBoolean()
             )
         );
-        */
         elevator.setDefaultCommand(Commands.run(() -> {
             double speed = -operatorJoystick.getLeftY() * ElevatorConstants.kMaxElevatorSpeed;
             elevator.setSpeed(speed);
@@ -261,6 +259,12 @@ public class RobotContainer {
         operatorJoystick.povLeft().onTrue(
             macros.groundIntake()
         );
+
+        operatorJoystick.povRight().onTrue(
+            Commands.runOnce(() -> {
+            arm.disable();
+            elevator.disable();
+        }, arm, elevator));
         
         operatorJoystick.leftBumper().onTrue(
             macros.outtake()

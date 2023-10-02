@@ -96,7 +96,7 @@ public final class Constants {
             public static final int driveMotorID = 10;
             public static final int angleMotorID = 11;
             public static final int canCoderID = 12;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(0.0);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(348.047);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -106,7 +106,7 @@ public final class Constants {
             public static final int driveMotorID = 1;
             public static final int angleMotorID = 2;
             public static final int canCoderID = 3;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(0.0);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(293.818);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -116,7 +116,7 @@ public final class Constants {
             public static final int driveMotorID = 7;
             public static final int angleMotorID = 8;
             public static final int canCoderID = 9;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(0.0);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(69.84);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -126,7 +126,7 @@ public final class Constants {
             public static final int driveMotorID = 4;
             public static final int angleMotorID = 5;
             public static final int canCoderID = 6;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(0.0);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(139.659);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -163,14 +163,14 @@ public final class Constants {
     public static final class Presets {
         public static final Preset STOW_PRESET = new Preset(2.35, 0); // done
         public static final Preset GROUND_INTAKE_PRESET = new Preset(-0.19, 0.10); // don't use
-        public static final Preset GROUND_INTAKE_CONE_PRESET = new Preset(0.22, 0);     
-        public static final Preset GROUND_INTAKE_CUBE_PRESET = new Preset(0.1, 0.01); // done
+        public static final Preset GROUND_INTAKE_CONE_PRESET = new Preset(3.89, 0.03);     
+        public static final Preset GROUND_INTAKE_CUBE_PRESET = new Preset(4.17, 0.069); // done
         public static final Preset SUBSTATION_INTAKE_CONE_PRESET = new Preset(0.06, 1.25);
         public static final Preset SUBSTATION_INTAKE_PRESET = new Preset(0.0, 1.13);
         public static final Preset SUBSTATION_INTAKE_CUBE_PRESET = new Preset(0.45, 1.05);
-        public static final Preset CONE_2ND_STAGE_PRESET = new Preset(0.54, 0.63);
+        public static final Preset CONE_2ND_STAGE_PRESET = new Preset(3.68, 0.794);
         public static final Preset CONE_3RD_STAGE_PRESET = new Preset(0.48, 1.16);
-        public static final Preset CUBE_2ND_STAGE_PRESET = new Preset(0.81, 0.60);
+        public static final Preset CUBE_2ND_STAGE_PRESET = new Preset(3.68, 0.794);
         public static final Preset CUBE_3RD_STAGE_PRESET = new Preset(0.57, 1.22);   
         public static final Preset SINGLE_SUBSTATION_CUBE = new Preset(1.85, 0);
         public static final Preset SINGLE_SUBSTATION_CONE = new Preset(0.72, 0.68);
@@ -280,7 +280,7 @@ public final class Constants {
         public static double kSpeedUpFailTime = 0.75; //seconds it tries to speed up
         public static double kOutFailTime = 0.75; //seconds it tries to outtake
 
-        public static double conePieceHeldThreshold = 500;
+        public static double conePieceHeldThreshold = 30;
         public static double cubePieceHeldThreshold = 30;
         public static boolean differentialIntake = true;
         public static int tofPort = 15;
