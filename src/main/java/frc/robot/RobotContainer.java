@@ -28,6 +28,7 @@ import frc.robot.subsystems.Lightstrip;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.ProfiledPIDElevator;
 import frc.robot.subsystems.Limelight;
+import frc.robot.autos.AutoRoutines;
 
 import frc.robot.autos.*;
 import frc.robot.commands.*;
@@ -46,6 +47,7 @@ public class RobotContainer {
     private final Lightstrip lightstrip = new Lightstrip();
     private final IntakeSubsystem intake = new IntakeSubsystem(lightstrip);
     private final Limelight limelight = new Limelight();
+    private final AutoRoutines autoRoutines = new AutoRoutines(s_Swerve, elevator, arm, intake, limelight, lightstrip);
     /* Controllers */
     private final Joystick driver = new Joystick(0);
 
@@ -60,8 +62,8 @@ public class RobotContainer {
     private final int rotationAxis = XboxController.Axis.kRightX.value;
 
     /* Driver Buttons */
-    // private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
-    private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+    private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
+    //private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     /* Subsystems */
     private final Macros macros = new Macros(s_Swerve, elevator, arm, intake, limelight);
     //private final AutoRoutines autoRoutines = new AutoRoutines(swerve, elevator, arm, intake, limelight, lightstrip);
@@ -76,7 +78,7 @@ public class RobotContainer {
                 () -> -driver.getRawAxis(translationAxis), 
                 () -> -driver.getRawAxis(strafeAxis), 
                 () -> -driver.getRawAxis(rotationAxis), 
-                () -> !robotCentric.getAsBoolean()
+                () -> false // s_Swerve.fieldOriented //!robotCentric.getAsBoolean
             )
         );
 
@@ -91,20 +93,22 @@ public class RobotContainer {
             arm.setSpeed(speed);
             }, arm).unless(arm::isEnabled));
         
-        /*
-        m_Chooser.setDefaultOption("3rd Stage Cube Balance", autoRoutines.chargingStation());
+        
+        //m_Chooser.setDefaultOption("3rd Stage Cube Balance", autoRoutines.chargingStation());
+        m_Chooser.setDefaultOption("3rd Stage Cube", autoRoutines.cube3rdAuto());
+
         m_Chooser.addOption("3rd Stage Cone Balance", autoRoutines.Cone3rdBalance());
         m_Chooser.addOption("2nd Stage Cone Balance", autoRoutines.coneChargingStation());
         m_Chooser.addOption("2nd Stage Cube Balance", autoRoutines.Cube2ndBalance());
-        
-        m_Chooser.addOption("3rd Stage Cube", autoRoutines.cube3rdAuto());
+        m_Chooser.addOption("3rd Stage Cube Balance", autoRoutines.chargingStation());
+        //m_Chooser.addOption("3rd Stage Cube", autoRoutines.cube3rdAuto());
         m_Chooser.addOption("3rd Stage Cone", autoRoutines.cone3rdAuto());
         m_Chooser.addOption("2nd Stage Cone", autoRoutines.cone2ndAuto());
         m_Chooser.addOption("2nd Stage Cube", autoRoutines.cube2ndAuto());
         
         m_Chooser.addOption("BLUE 2 Piece Auto", autoRoutines.blueConeCubeAuto());
         m_Chooser.addOption("RED 2 Piece Auto", autoRoutines.redConeCubeAuto());
-        */
+        
          
         SmartDashboard.putData(m_Chooser);
 
@@ -138,11 +142,11 @@ public class RobotContainer {
     private void configureButtonBindings() {
         
         /* Driver Buttons */
-        // zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
+        zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
 
-        //driverJoystick.y().onTrue(Commands.runOnce(() -> s_Swerve.zeroGyro(), s_Swerve));
+        driverJoystick.y().onTrue(Commands.runOnce(() -> s_Swerve.zeroGyro(), s_Swerve));
 
-        //driverJoystick.b().onTrue(Commands.runOnce(() -> swerve.toggleField(), swerve));
+        driverJoystick.b().onTrue(Commands.runOnce(() -> s_Swerve.toggleField(), s_Swerve));
 
         //driverJoystick.x().onTrue(Commands.runOnce(() -> swerve.setHeading(180.000)));
         //driverJoystick.leftBumper().onTrue(Commands.runOnce(() -> swerve.stopModules(), swerve));
@@ -285,8 +289,8 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        //return m_Chooser.getSelected(); 
-        return new exampleAuto(s_Swerve);
+        return m_Chooser.getSelected(); 
+        //return new exampleAuto(s_Swerve);
     }
 }
 

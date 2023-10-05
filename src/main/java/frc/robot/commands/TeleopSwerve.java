@@ -42,5 +42,6 @@ public class TeleopSwerve extends CommandBase {
             true, 
             true
         );
+        System.out.println(s_Swerve.fieldOriented);
     }
 }

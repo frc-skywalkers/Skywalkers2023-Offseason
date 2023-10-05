@@ -21,12 +21,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Swerve extends SubsystemBase {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
-    public Pigeon2 gyro;
+    public Pigeon2 gyro; 
+
+    public boolean fieldOriented = true;
 
     public Swerve() {
         gyro = new Pigeon2(Constants.Swerve.pigeonID);
         gyro.configFactoryDefault();
-        zeroGyro();
+        zeroGyro(); 
 
         mSwerveMods = new SwerveModule[] {
             new SwerveModule(0, Constants.Swerve.Mod0.constants),
@@ -46,7 +48,12 @@ public class Swerve extends SubsystemBase {
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
         SmartDashboard.putBoolean("Field Oriented NEW - fiewjfiwejfijew", fieldRelative);
+        SmartDashboard.putBoolean("fieldoriented", fieldOriented);
+
         SmartDashboard.putNumber("Heading", getYawDouble());
+        SmartDashboard.putNumber("gyro heading", gyro.getYaw());
+        SmartDashboard.putNumber("pitch", gyro.getPitch());
+        SmartDashboard.putNumber("roll", gyro.getRoll());
         SwerveModuleState[] swerveModuleStates =
             Constants.Swerve.swerveKinematics.toSwerveModuleStates(
                 fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
@@ -123,6 +130,11 @@ public class Swerve extends SubsystemBase {
         gyro.setYaw(Angle);
     }
 
+    public void toggleField(){
+        System.out.println("a");
+        fieldOriented = !fieldOriented;
+    }
+
     public Rotation2d getYaw() {
         return (Constants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - gyro.getYaw()) : Rotation2d.fromDegrees(gyro.getYaw());
     }
@@ -133,6 +145,10 @@ public class Swerve extends SubsystemBase {
 
     public double getRoll() {
         return (Constants.Swerve.invertGyro) ? (360 - gyro.getRoll()) : (gyro.getRoll());
+    }
+
+    public double getPitch(){
+        return (Constants.Swerve.invertGyro) ? (360 - gyro.getPitch()) : (gyro.getPitch());
     }
 
     public void resetModulesToAbsolute(){

@@ -153,7 +153,7 @@ public class Macros {
       }
     );
   }
-
+  /* 
   public CommandBase singleSubstationIntake() {
     return Commands.runOnce(() -> {
       Mode m = intake.getMode();
@@ -167,6 +167,7 @@ public class Macros {
     }
   );
 }
+*/
 
   public CommandBase cube2ndStage() {
     return moveToPreset(
