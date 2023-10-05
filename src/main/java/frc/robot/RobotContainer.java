@@ -13,6 +13,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.lib.util.COTSFalconSwerveConstants.driveGearRatios;
 import frc.robot.Constants.DashboardConstants;
 import frc.robot.Constants.ElevatorConstants;
 import frc.robot.Constants.NewArmConstants;
@@ -75,9 +76,10 @@ public class RobotContainer {
                 () -> -driver.getRawAxis(translationAxis), 
                 () -> -driver.getRawAxis(strafeAxis), 
                 () -> -driver.getRawAxis(rotationAxis), 
-                () -> robotCentric.getAsBoolean()
+                () -> !robotCentric.getAsBoolean()
             )
         );
+
         elevator.setDefaultCommand(Commands.run(() -> {
             double speed = -operatorJoystick.getLeftY() * ElevatorConstants.kMaxElevatorSpeed;
             elevator.setSpeed(speed);
@@ -223,6 +225,8 @@ public class RobotContainer {
         //operatorJoystick.a().onTrue(Commands.runOnce(() -> intake.setSpeed(0.5), intake)); //intake.stop()
 
         // operatorJoystick.a().onTrue(Commands.runOnce(() -> macros.moveToPreset(0.373, 0)));
+        driverJoystick.x().onTrue(Commands.runOnce(() -> s_Swerve.setHeading(180.000), s_Swerve));
+
         operatorJoystick.rightTrigger().onTrue(
             Commands.runOnce(() -> {
             arm.stop();
