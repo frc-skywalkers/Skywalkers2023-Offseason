@@ -139,6 +139,7 @@ public final class AutoRoutines {
     );
   }
 
+  
   public CommandBase redConeCubeAuto() {
     PathPlannerTrajectory trajectory = PathPlanner.loadPath("Left_Cone_Cube_Auto", 1.5, 1.75);
     trajectory = PathPlannerTrajectory.transformTrajectoryForAlliance(trajectory, DriverStation.Alliance.Red);
@@ -160,6 +161,20 @@ public final class AutoRoutines {
       macros.stow()
     );
   }
+
+  /*public CommandBase testAuto() {
+    PathPlannerTrajectory trajectory = PathPlanner.loadPath("Test", 1.5, 1.75);
+    trajectory = PathPlannerTrajectory.transformTrajectoryForAlliance(trajectory, DriverStation.Alliance.Red);
+
+    HashMap<String, Command> eventMap = new HashMap<>();
+    eventMap.put(new InstantCommand(() -> s_Swerve.zeroGyro()));
+
+    FollowPathWithEvents grabConeAndPrepareToScore = new FollowPathWithEvents(
+      baseSwerveCommand(trajectory, true), 
+      trajectory.getMarkers(),
+      eventMap);
+  }
+  */
 
   public CommandBase coneChargingStation() {
 

@@ -91,7 +91,7 @@ public class RobotContainer {
             double speed = operatorJoystick.getRightY() * NewArmConstants.kMaxArmSpeed;
             speed = Math.abs(speed) > OIConstants.kDeadband ? speed : 0.0;
             arm.setSpeed(speed);
-            }, arm).unless(arm::isEnabled));
+            }, arm).unless(arm::isEnabled)); //.unless(arm::isEnabled)
         
         
         //m_Chooser.setDefaultOption("3rd Stage Cube Balance", autoRoutines.chargingStation());
@@ -165,7 +165,7 @@ public class RobotContainer {
             elevator.disable();
         }, arm, elevator));
 
-        // Start --> Home
+        Start --> Home
         operatorJoystick.start().onTrue(macros.home());
 
     
@@ -229,6 +229,9 @@ public class RobotContainer {
         //operatorJoystick.a().onTrue(Commands.runOnce(() -> intake.setSpeed(0.5), intake)); //intake.stop()
 
         // operatorJoystick.a().onTrue(Commands.runOnce(() -> macros.moveToPreset(0.373, 0)));
+
+        operatorJoystick.start().onTrue(macros.home());
+
         driverJoystick.x().onTrue(Commands.runOnce(() -> s_Swerve.setHeading(180.000), s_Swerve));
 
         operatorJoystick.rightTrigger().onTrue(

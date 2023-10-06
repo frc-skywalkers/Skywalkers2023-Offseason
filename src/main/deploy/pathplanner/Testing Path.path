@@ -7,8 +7,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.756244544335877,
-        "y": 4.660758984441146
+        "x": 2.80413731471398,
+        "y": 4.96
       },
       "holonomicAngle": -180.0,
       "isReversal": false,
@@ -39,7 +39,7 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": true,
+      "isStopPoint": false,
       "stopEvent": {
         "names": [],
         "executionBehavior": "parallel",
@@ -74,22 +74,22 @@
     },
     {
       "anchorPoint": {
-        "x": 6.58,
+        "x": 7.0,
         "y": 4.59
       },
       "prevControl": {
-        "x": 6.276923690233813,
+        "x": 6.696923690233813,
         "y": 4.59
       },
       "nextControl": {
-        "x": 6.276923690233813,
+        "x": 6.696923690233813,
         "y": 4.59
       },
       "holonomicAngle": 0,
       "isReversal": true,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": true,
+      "isStopPoint": false,
       "stopEvent": {
         "names": [],
         "executionBehavior": "parallel",
@@ -114,7 +114,7 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": true,
+      "isStopPoint": false,
       "stopEvent": {
         "names": [],
         "executionBehavior": "parallel",
@@ -128,8 +128,8 @@
         "y": 4.415465369803353
       },
       "prevControl": {
-        "x": 2.2248247283495437,
-        "y": 4.744527127590497
+        "x": 2.3459029482666462,
+        "y": 4.415465369803353
       },
       "nextControl": null,
       "holonomicAngle": 180.0,
@@ -145,5 +145,27 @@
       }
     }
   ],
-  "markers": []
+  "maxVelocity": 1.5,
+  "maxAcceleration": 1.75,
+  "isReversed": null,
+  "markers": [
+    {
+      "position": 1.06,
+      "names": [
+        "intakeDown"
+      ]
+    },
+    {
+      "position": 3.0,
+      "names": [
+        "stow"
+      ]
+    },
+    {
+      "position": 3.84,
+      "names": [
+        "prepareScore"
+      ]
+    }
+  ]
 }

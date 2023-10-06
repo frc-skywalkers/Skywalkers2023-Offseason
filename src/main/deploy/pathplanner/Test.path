@@ -2,15 +2,15 @@
   "waypoints": [
     {
       "anchorPoint": {
-        "x": 1.2729339087150395,
-        "y": 7.418948041021082
+        "x": 1.9178491360454943,
+        "y": 4.962957818276748
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.27293390871504,
-        "y": 7.418948041021082
+        "x": 2.8287535089745743,
+        "y": 4.663716802717894
       },
-      "holonomicAngle": 180.0,
+      "holonomicAngle": -180.0,
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
@@ -24,19 +24,19 @@
     },
     {
       "anchorPoint": {
-        "x": 1.2737089189456157,
-        "y": 7.439383837101008
+        "x": 7.338679911734824,
+        "y": 4.57513432040753
       },
       "prevControl": {
-        "x": 0.19815787895464698,
-        "y": 7.501262285510684
+        "x": 6.122277933523024,
+        "y": 4.57513432040753
       },
       "nextControl": {
-        "x": 2.3492599589365843,
-        "y": 7.377505388691333
+        "x": 6.122277933523024,
+        "y": 4.57513432040753
       },
-      "holonomicAngle": 90.0,
-      "isReversal": false,
+      "holonomicAngle": 180.0,
+      "isReversal": true,
       "velOverride": null,
       "isLocked": false,
       "isStopPoint": false,
@@ -49,15 +49,15 @@
     },
     {
       "anchorPoint": {
-        "x": 1.8756678761594288,
-        "y": 4.8725215123905725
+        "x": 1.8865356359184942,
+        "y": 4.445821162475658
       },
       "prevControl": {
-        "x": 0.10489186932963712,
-        "y": 4.831038070048689
+        "x": 3.8335047313800534,
+        "y": 4.36713149641577
       },
       "nextControl": null,
-      "holonomicAngle": 0,
+      "holonomicAngle": 180.0,
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
@@ -70,5 +70,27 @@
       }
     }
   ],
-  "markers": []
+  "maxVelocity": 1.5,
+  "maxAcceleration": 1.75,
+  "isReversed": null,
+  "markers": [
+    {
+      "position": 1.06,
+      "names": [
+        "intakeDown"
+      ]
+    },
+    {
+      "position": 1.0,
+      "names": [
+        "stow"
+      ]
+    },
+    {
+      "position": 1.8399999999999999,
+      "names": [
+        "prepareScore"
+      ]
+    }
+  ]
 }

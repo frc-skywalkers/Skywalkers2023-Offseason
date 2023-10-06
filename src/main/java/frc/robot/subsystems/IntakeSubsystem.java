@@ -82,9 +82,11 @@ public class IntakeSubsystem extends SubsystemBase {
     return intake.getStatorCurrent();
   }
 
+  
   public boolean intakeEmpty() {
     return getActualVelocity() > IntakeConstants.threshold(intakeSpeed);
   }
+  
 
   public boolean pieceHeld() {
     if(mode == Mode.CONE) {
@@ -133,6 +135,8 @@ public class IntakeSubsystem extends SubsystemBase {
     } else if(mode == Mode.CUBE) {
       lightstrip.setColor(lightstripConstants.cubeIntake);
     }
+
+    SmartDashboard.putNumber("current", getActualCurrent());
 
 
     Dashboard.Intake.Debugging.putNumber("Intake Velocity", getActualVelocity());

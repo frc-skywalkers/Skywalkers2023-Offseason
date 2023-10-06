@@ -55,7 +55,7 @@ public class Macros {
 
   public CommandBase moveToPreset(double elevatorPos, double armPos) {
     return Commands.parallel(
-      //arm.goToPosition(armPos),
+      arm.goToPosition(armPos),
       elevator.goToPosition(elevatorPos)
     );
   }
