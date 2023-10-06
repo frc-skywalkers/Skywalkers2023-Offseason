@@ -41,12 +41,12 @@ import frc.robot.subsystems.Lightstrip;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.ProfiledPIDElevator;
-import frc.robot.subsystems.Swerve;
+import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem.Mode;
 
 public final class AutoRoutines {
 
-  private final Swerve swerve;
+  private final SwerveSubsystem swerve;
   private final ProfiledPIDElevator elevator;
   private final ArmSubsystem arm;
   private final IntakeSubsystem intake;
@@ -57,7 +57,7 @@ public final class AutoRoutines {
 
 
   public AutoRoutines(
-      Swerve swerve, 
+      SwerveSubsystem swerve, 
       ProfiledPIDElevator elevator, 
       ArmSubsystem arm, 
       IntakeSubsystem intake, 

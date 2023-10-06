@@ -1,104 +1,106 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
+// // Copyright (c) FIRST and other WPILib contributors.
+// // Open Source Software; you can modify and/or share it under the terms of
+// // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+// package frc.robot.commands;
 
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.math.MathUtil;
-import frc.robot.Constants.*;
-import frc.robot.subsystems.*;
-import frc.robot.subsystems.Swerve;
+// import edu.wpi.first.math.controller.PIDController;
+// import edu.wpi.first.math.geometry.Translation2d;
+// import edu.wpi.first.wpilibj2.command.CommandBase;
+// import edu.wpi.first.math.MathUtil;
+// import frc.robot.Constants.*;
+// import frc.robot.subsystems.*;
+// import frc.robot.subsystems.Swerve;
 
-public class MoveToObject extends CommandBase {
-  /** Creates a new MoveToObject. */
+// //DO NOT USE
 
-  private final PIDController xcontroller = new PIDController(LimelightConstants.kPx, LimelightConstants.kIx, LimelightConstants.kDx);
-  private final PIDController ycontroller = new PIDController(LimelightConstants.kPy, LimelightConstants.kIy, LimelightConstants.kDy);
-  private final PIDController rcontroller = new PIDController(LimelightConstants.kPr, LimelightConstants.kIr, LimelightConstants.kDr);
+// public class MoveToObject extends CommandBase {
+//   /** Creates a new MoveToObject. */
 
-  private final double targetXDist;
-  private final double targetYDist;
-  private final double targetR;
+//   private final PIDController xcontroller = new PIDController(LimelightConstants.kPx, LimelightConstants.kIx, LimelightConstants.kDx);
+//   private final PIDController ycontroller = new PIDController(LimelightConstants.kPy, LimelightConstants.kIy, LimelightConstants.kDy);
+//   private final PIDController rcontroller = new PIDController(LimelightConstants.kPr, LimelightConstants.kIr, LimelightConstants.kDr);
 
-  double currXDist;
-  double currYDist;
+//   private final double targetXDist;
+//   private final double targetYDist;
+//   private final double targetR;
 
-  double xspeed;
-  double yspeed;
+//   double currXDist;
+//   double currYDist;
 
-  Swerve swerveSubsystem;
-  Limelight camera;
+//   double xspeed;
+//   double yspeed;
 
-  public MoveToObject(Swerve swerveSubsystem, Limelight camera, double targetXDist, double targetYDist, double targetR){
-    this.targetXDist = targetXDist;
-    this.targetYDist = targetYDist;
-    this.targetR = targetR;
+//   Swerve swerveSubsystem;
+//   Limelight camera;
 
-    this.swerveSubsystem = swerveSubsystem;
-    this.camera = camera;
+//   public MoveToObject(Swerve swerveSubsystem, Limelight camera, double targetXDist, double targetYDist, double targetR){
+//     this.targetXDist = targetXDist;
+//     this.targetYDist = targetYDist;
+//     this.targetR = targetR;
+
+//     this.swerveSubsystem = swerveSubsystem;
+//     this.camera = camera;
     
-    addRequirements(swerveSubsystem);
-    addRequirements(camera);
-    // Use addRequirements() here to declare subsystem dependencies.
-  }
+//     addRequirements(swerveSubsystem);
+//     addRequirements(camera);
+//     // Use addRequirements() here to declare subsystem dependencies.
+//   }
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    xcontroller.setTolerance(LimelightConstants.xtolerance);
-    ycontroller.setTolerance(LimelightConstants.ytolerance);
-    rcontroller.setTolerance(LimelightConstants.rtolerance);
-  }
+//   // Called when the command is initially scheduled.
+//   @Override
+//   public void initialize() {
+//     xcontroller.setTolerance(LimelightConstants.xtolerance);
+//     ycontroller.setTolerance(LimelightConstants.ytolerance);
+//     rcontroller.setTolerance(LimelightConstants.rtolerance);
+//   }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
+//   // Called every time the scheduler runs while the command is scheduled.
+//   @Override
+//   public void execute() {
 
-    double currYAngle = camera.getObjectTY() + LimelightConstants.mountingangle;
-    double currXAngle = camera.getObjectTX();
+//     double currYAngle = camera.getObjectTY() + LimelightConstants.mountingangle;
+//     double currXAngle = camera.getObjectTX();
 
-    currXDist = (LimelightConstants.cameraheight - LimelightConstants.objectHeight) * Math.tan(currYAngle * (Math.PI/180)); //rad
-    currYDist = currXDist*Math.tan(currXAngle * (Math.PI/180)); //rad
+//     currXDist = (LimelightConstants.cameraheight - LimelightConstants.objectHeight) * Math.tan(currYAngle * (Math.PI/180)); //rad
+//     currYDist = currXDist*Math.tan(currXAngle * (Math.PI/180)); //rad
 
-    double robotTargetY = targetYDist + LimelightConstants.limelightOffsetCenter;
+//     double robotTargetY = targetYDist + LimelightConstants.limelightOffsetCenter;
 
-    xspeed = -1 * MathUtil.clamp((xcontroller.calculate(currXDist, targetXDist)), -LimelightConstants.xclamp, LimelightConstants.xclamp);
-    yspeed = 1 * MathUtil.clamp((ycontroller.calculate(currYDist, robotTargetY)), -LimelightConstants.yclamp, LimelightConstants.yclamp);
+//     xspeed = -1 * MathUtil.clamp((xcontroller.calculate(currXDist, targetXDist)), -LimelightConstants.xclamp, LimelightConstants.xclamp);
+//     yspeed = 1 * MathUtil.clamp((ycontroller.calculate(currYDist, robotTargetY)), -LimelightConstants.yclamp, LimelightConstants.yclamp);
 
 
-    //stopping individually since command only ends with all 3
-    if (xcontroller.atSetpoint()){
-      xspeed = 0;
-    }
-    if (ycontroller.atSetpoint()){
-      yspeed = 0;
-    }
+//     //stopping individually since command only ends with all 3
+//     if (xcontroller.atSetpoint()){
+//       xspeed = 0;
+//     }
+//     if (ycontroller.atSetpoint()){
+//       yspeed = 0;
+//     }
     
-    //stopping abrupt movement at end
-    if (Math.abs(xspeed) < 0.02){
-      xspeed = 0;
-    }
-    if (Math.abs(yspeed) < 0.02){
-      yspeed = 0;
-    }
+//     //stopping abrupt movement at end
+//     if (Math.abs(xspeed) < 0.02){
+//       xspeed = 0;
+//     }
+//     if (Math.abs(yspeed) < 0.02){
+//       yspeed = 0;
+//     }
 
-    swerveSubsystem.drive(new Translation2d(xspeed, yspeed), 0, false, true);
-  }
+//     swerveSubsystem.drive(new Translation2d(xspeed, yspeed), 0, false, true);
+//   }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    swerveSubsystem.stopModules();
-  }
+//   // Called once the command ends or is interrupted.
+//   @Override
+//   public void end(boolean interrupted) {
+//     swerveSubsystem.stopModules();
+//   }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return ((Math.abs(targetXDist - currXDist) < LimelightConstants.xtolerance) ||
-      (Math.abs(targetYDist - currYDist) < LimelightConstants.ytolerance) ||
-      (xspeed == 0 && yspeed == 0));
-  }
-}
+//   // Returns true when the command should end.
+//   @Override
+//   public boolean isFinished() {
+//     return ((Math.abs(targetXDist - currXDist) < LimelightConstants.xtolerance) ||
+//       (Math.abs(targetYDist - currYDist) < LimelightConstants.ytolerance) ||
+//       (xspeed == 0 && yspeed == 0));
+//   }
+// }

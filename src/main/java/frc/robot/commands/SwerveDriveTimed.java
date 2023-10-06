@@ -9,7 +9,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Swerve;
+import frc.robot.subsystems.SwerveSubsystem;
 
 public class SwerveDriveTimed extends CommandBase {
   /** Creates a new SwerveDriveTimed. */
@@ -22,8 +22,8 @@ public class SwerveDriveTimed extends CommandBase {
   private double startTime;
   private double runTime;
 
-  Swerve swerve;
-  public SwerveDriveTimed(Swerve swerve, double xSpeed, double ySpeed, double rotSpeed, double runTime) {
+  SwerveSubsystem swerve;
+  public SwerveDriveTimed(SwerveSubsystem swerve, double xSpeed, double ySpeed, double rotSpeed, double runTime) {
     this.swerve = swerve;
     // Use addRequirements() here to declare subsystem dependencies.
     this.xSpeed = xSpeed;
@@ -36,14 +36,15 @@ public class SwerveDriveTimed extends CommandBase {
   @Override
   public void initialize() {
     startTime = Timer.getFPGATimestamp();
-    swerve.zeroGyro();
+    swerve.reset();
+    swerve.reset();
     swerve.resetOdometry(new Pose2d(0, 0, new Rotation2d(Math.toRadians(0)))); //????????
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    swerve.drive(new Translation2d(xSpeed, ySpeed), rotSpeed, true, true); ///????????
+    swerve.drive(xSpeed, ySpeed, rotSpeed); ///????????
   }
 
   // Called once the command ends or is interrupted.

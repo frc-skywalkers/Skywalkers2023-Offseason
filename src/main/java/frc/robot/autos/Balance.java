@@ -10,17 +10,17 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Swerve;
+import frc.robot.subsystems.SwerveSubsystem;
 
 public class Balance extends CommandBase {
   /** Creates a new Balance. */
 
   //275, 97.5
 
-  Swerve swerve;
+  SwerveSubsystem swerve;
   PIDController controller = new PIDController(0.05, 0, 0);
 
-  public Balance(Swerve swerve) {
+  public Balance(SwerveSubsystem swerve) {
     this.swerve = swerve;
     /*
     SmartDashboard.putNumber("balancee speed ", 0.00);
@@ -36,7 +36,7 @@ public class Balance extends CommandBase {
   @Override
   public void initialize() {
     controller.setSetpoint(0);
-    //swerve.toggleField();
+    swerve.toggleField();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -47,11 +47,7 @@ public class Balance extends CommandBase {
     SmartDashboard.putNumber("balancee roll", swerve.getRoll());
     SmartDashboard.putNumber("balancee speed should", swerve.getRoll() * 0.05);
     xSpeed = -MathUtil.clamp(xSpeed, -1, 1);
-    swerve.drive(
-        new Translation2d(xSpeed, 0).times(Constants.Swerve.maxSpeed),
-        0,
-        false,
-        true);
+    swerve.drive(xSpeed, 0, 0);
   }
 
   // Called once the command ends or is interrupted.

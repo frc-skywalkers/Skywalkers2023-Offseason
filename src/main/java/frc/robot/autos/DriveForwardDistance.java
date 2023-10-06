@@ -7,14 +7,16 @@ package frc.robot.autos;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Dashboard;
-import frc.robot.subsystems.Swerve;
+import frc.robot.subsystems.SwerveSubsystem;
+
+//DO NOT USEEEEE
 
 public class DriveForwardDistance extends CommandBase {
   /** Creates a new DriveForwardDistance. */
-  private final Swerve swerve;
+  private final SwerveSubsystem swerve;
   private double distance;
   private double start;
-  public DriveForwardDistance(Swerve swerve, double distance) {
+  public DriveForwardDistance(SwerveSubsystem swerve, double distance) {
     this.swerve = swerve;
     this.distance = distance;
     start = swerve.getPose().getX();
@@ -37,7 +39,7 @@ public class DriveForwardDistance extends CommandBase {
     Dashboard.Tele.Debugging.putNumber("Start X", start);
     Dashboard.Tele.Debugging.putNumber("Current X", swerve.getPose().getX());
     Dashboard.Tele.Debugging.putNumber("Distance Travelled", swerve.getPose().getX() - start);
-    swerve.drive(new Translation2d(1, 0), 0, true, true); //?????
+    swerve.drive(1, 0, 0); //?????
   }
 
   // Called once the command ends or is interrupted.

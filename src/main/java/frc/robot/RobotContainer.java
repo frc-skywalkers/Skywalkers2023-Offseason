@@ -41,13 +41,14 @@ import frc.robot.subsystems.*;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-    private final Swerve s_Swerve = new Swerve();
+    //private final Swerve s_Swerve = new Swerve();
+    private final SwerveSubsystem swerve = new SwerveSubsystem();
     public final ProfiledPIDElevator elevator = new ProfiledPIDElevator();
     public final ArmSubsystem arm = new ArmSubsystem();
     private final Lightstrip lightstrip = new Lightstrip();
     private final IntakeSubsystem intake = new IntakeSubsystem(lightstrip);
     private final Limelight limelight = new Limelight();
-    private final AutoRoutines autoRoutines = new AutoRoutines(s_Swerve, elevator, arm, intake, limelight, lightstrip);
+    private final AutoRoutines autoRoutines = new AutoRoutines(swerve, elevator, arm, intake, limelight, lightstrip);
     /* Controllers */
     private final Joystick driver = new Joystick(0);
 
@@ -65,13 +66,17 @@ public class RobotContainer {
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     //private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     /* Subsystems */
-    private final Macros macros = new Macros(s_Swerve, elevator, arm, intake, limelight);
+    private final Macros macros = new Macros(swerve, elevator, arm, intake, limelight);
     //private final AutoRoutines autoRoutines = new AutoRoutines(swerve, elevator, arm, intake, limelight, lightstrip);
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
         startDashboard();
+
+        swerve.setDefaultCommand(new SwerveJoystick(swerve, driverJoystick));
+
+        /*
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
                 s_Swerve, 
@@ -81,6 +86,7 @@ public class RobotContainer {
                 () -> false // s_Swerve.fieldOriented //!robotCentric.getAsBoolean
             )
         );
+        */
 
         elevator.setDefaultCommand(Commands.run(() -> {
             double speed = -operatorJoystick.getLeftY() * ElevatorConstants.kMaxElevatorSpeed;
@@ -142,11 +148,23 @@ public class RobotContainer {
     private void configureButtonBindings() {
         
         /* Driver Buttons */
-        zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
+        //zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
+
+        driverJoystick.y().onTrue(Commands.runOnce(() -> swerve.reset(), swerve));
+        driverJoystick.b().onTrue(Commands.runOnce(() -> swerve.toggleField(), swerve));
+
+        //driverJoystick.x().onTrue(Commands.runOnce(() -> s_Swerve.setHeading(180.000), s_Swerve));
+        driverJoystick.x().onTrue(Commands.runOnce(() -> swerve.setHeading(180.000), swerve));
+
+        driverJoystick.leftBumper().onTrue(Commands.runOnce(() -> swerve.stopModules(), swerve));
+        driverJoystick.rightBumper().onTrue(Commands.runOnce(swerve::stopModules, swerve));
+
+        /*
 
         driverJoystick.y().onTrue(Commands.runOnce(() -> s_Swerve.zeroGyro(), s_Swerve));
 
         driverJoystick.b().onTrue(Commands.runOnce(() -> s_Swerve.toggleField(), s_Swerve));
+        */
 
         //driverJoystick.x().onTrue(Commands.runOnce(() -> swerve.setHeading(180.000)));
         //driverJoystick.leftBumper().onTrue(Commands.runOnce(() -> swerve.stopModules(), swerve));
@@ -232,8 +250,6 @@ public class RobotContainer {
 
         operatorJoystick.start().onTrue(macros.home());
 
-        driverJoystick.x().onTrue(Commands.runOnce(() -> s_Swerve.setHeading(180.000), s_Swerve));
-
         operatorJoystick.rightTrigger().onTrue(
             Commands.runOnce(() -> {
             arm.stop();
@@ -242,7 +258,7 @@ public class RobotContainer {
             elevator.disable();
         }, arm, elevator));
 
-        operatorJoystick.start().onTrue(macros.home());
+        //operatorJoystick.start().onTrue(macros.home());
 
         operatorJoystick.x().onTrue(
             macros.general2ndStage()

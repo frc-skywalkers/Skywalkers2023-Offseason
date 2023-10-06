@@ -18,13 +18,13 @@ import frc.robot.subsystems.Lightstrip;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.ProfiledPIDElevator;
-import frc.robot.subsystems.Swerve;
+import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem.Mode;
 
 /** Add your docs here. */
 public class Macros {
 
-  private final Swerve swerve;
+  private final SwerveSubsystem swerve;
   private final ProfiledPIDElevator elevator;
   private final ArmSubsystem arm;
   private final IntakeSubsystem intake;
@@ -32,7 +32,7 @@ public class Macros {
 
 
   public Macros(
-      Swerve swerve, 
+      SwerveSubsystem swerve, 
       ProfiledPIDElevator elevator, 
       ArmSubsystem arm, 
       IntakeSubsystem intake, 
