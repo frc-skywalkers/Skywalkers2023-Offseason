@@ -76,6 +76,8 @@ public class SwerveSubsystem extends SubsystemBase {
   private double resetY = 0.00;
 
   private int resetCount = 0;
+
+  public boolean slowmode = false;
     
   
 
@@ -239,6 +241,11 @@ public class SwerveSubsystem extends SubsystemBase {
   }
 
   public void drive(double xSpeed, double ySpeed, double turningSpeed) {
+    if (slowmode){
+      xSpeed = xSpeed * DriveConstants.kslowmode;
+      ySpeed = ySpeed * DriveConstants.kslowmode;
+      turningSpeed = turningSpeed * DriveConstants.kslowmode;
+    }
     ChassisSpeeds chassisSpeeds;
     if (fieldOriented) {
       // Relative to field

@@ -159,6 +159,8 @@ public class RobotContainer {
         driverJoystick.leftBumper().onTrue(Commands.runOnce(() -> swerve.stopModules(), swerve));
         driverJoystick.rightBumper().onTrue(Commands.runOnce(swerve::stopModules, swerve));
 
+        driverJoystick.leftTrigger().onTrue(Commands.runOnce(() -> swerve.slowmode = true));
+
         /*
 
         driverJoystick.y().onTrue(Commands.runOnce(() -> s_Swerve.zeroGyro(), s_Swerve));

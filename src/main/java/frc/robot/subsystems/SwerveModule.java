@@ -37,8 +37,8 @@ public class SwerveModule extends SubsystemBase {
 
     this.motorId = motorId;
 
-    driveMotor = new WPI_TalonFX(driveMotorId);
-    turningMotor = new WPI_TalonFX(turningMotorId);
+    driveMotor = new WPI_TalonFX(driveMotorId, "CANivore");
+    turningMotor = new WPI_TalonFX(turningMotorId, "CANivore");
 
     driveMotor.setInverted(driveMotorReversed);
     turningMotor.setInverted(turningMotorReversed);
@@ -46,7 +46,7 @@ public class SwerveModule extends SubsystemBase {
     driveMotor.setNeutralMode(NeutralMode.Brake);
     turningMotor.setNeutralMode(NeutralMode.Brake);
 
-    absoluteEncoder = new CANCoder(absoluteEncoderId);
+    absoluteEncoder = new CANCoder(absoluteEncoderId, "CANivore");
 
     // CANCoderConfiguration absoluteConfig = new CANewaCoderConfiguration();
     

@@ -161,17 +161,17 @@ public final class Constants {
     }
 
     public static final class Presets {
-        public static final Preset STOW_PRESET = new Preset(2.43, 0); // done
+        public static final Preset STOW_PRESET = new Preset(2.5, 0); // done
         // public static final Preset GROUND_INTAKE_PRESET = new Preset(-0.19, 0.10); // don't use
-        public static final Preset GROUND_INTAKE_CONE_PRESET = new Preset(4.016, 0.0583);     
+        public static final Preset GROUND_INTAKE_CONE_PRESET = new Preset(3.909, 0.0483);     
         public static final Preset GROUND_INTAKE_CUBE_PRESET = new Preset(4.26, 0.0874); // done
-        public static final Preset SUBSTATION_INTAKE_CONE_PRESET = new Preset(3.68, 0.85);
+        public static final Preset SUBSTATION_INTAKE_CONE_PRESET = new Preset(3.875, 0.995);
         // public static final Preset SUBSTATION_INTAKE_PRESET = new Preset(0.0, 1.13);
         public static final Preset SUBSTATION_INTAKE_CUBE_PRESET = new Preset(3.68, 0.85);
-        public static final Preset CONE_2ND_STAGE_PRESET = new Preset(3.68, 0.794);
-        public static final Preset CONE_3RD_STAGE_PRESET = new Preset(3.68, 0.9);
-        public static final Preset CUBE_2ND_STAGE_PRESET = new Preset(3.68, 0.794);
-        public static final Preset CUBE_3RD_STAGE_PRESET = new Preset(3.68, 0.9);   
+        public static final Preset CONE_2ND_STAGE_PRESET = new Preset(3.439, 0.575);
+        public static final Preset CONE_3RD_STAGE_PRESET = new Preset(3.778, 1.098);
+        public static final Preset CUBE_2ND_STAGE_PRESET = new Preset(3.306, 0.552);
+        public static final Preset CUBE_3RD_STAGE_PRESET = new Preset(3.600, 1.063);   
         // public static final Preset SINGLE_SUBSTATION_CUBE = new Preset(1.85, 0);
         // public static final Preset SINGLE_SUBSTATION_CONE = new Preset(0.72, 0.68);
     }
@@ -257,7 +257,7 @@ public final class Constants {
         public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = 2.96; //
         public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = 4.377;
         public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = 5.140;
-        public static final double kBackRightDriveAbsoluteEncoderOffsetRad = 4.493;
+        public static final double kBackRightDriveAbsoluteEncoderOffsetRad = 5.278+0.20;
 
         public static final int kIMUPort = 13;
 
@@ -269,13 +269,15 @@ public final class Constants {
     
         public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond * 5.000 / 5.0000; // ?????
         public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = kPhysicalMaxAngularSpeedRadiansPerSecond/3; //????
+        public static double kslowmode = 0.6;
+
     }
 
     public static final class IntakeConstants {
         public static final int kIntakePort = 22; // ??
         public static final double kMaxIntakeSpeed = 0.5; // ?? 0.4
         public static final double kMaxOuttakeSpeed = -0.3; // ??
-        public static final double kHoldSpeed = 0.10; //THIS ONE
+        public static final double kHoldSpeed = 0.06; //THIS ONE
 
         public static double kSpeedUpFailTime = 0.75; //seconds it tries to speed up
         public static double kOutFailTime = 0.75; //seconds it tries to outtake
