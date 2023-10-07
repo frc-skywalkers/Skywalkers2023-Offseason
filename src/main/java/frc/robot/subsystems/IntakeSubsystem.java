@@ -133,9 +133,9 @@ public class IntakeSubsystem extends SubsystemBase {
   public void periodic() {
     if(mode == Mode.CONE) {
       if(intakeSpeed == 0) {
-        lightstrip.setColor(lightstripConstants.coneIntaking);
-      } else {
         lightstrip.setColor(lightstripConstants.coneIntake);
+      } else {
+        lightstrip.setColor(lightstripConstants.coneIntaking);
       }
     } else if(mode == Mode.CUBE) {
       if(intakeSpeed == 0) {
