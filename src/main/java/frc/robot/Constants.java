@@ -169,7 +169,7 @@ public final class Constants {
         // public static final Preset SUBSTATION_INTAKE_PRESET = new Preset(0.0, 1.13);
         public static final Preset SUBSTATION_INTAKE_CUBE_PRESET = new Preset(3.68, 0.85);
         public static final Preset CONE_2ND_STAGE_PRESET = new Preset(3.439, 0.575);
-        public static final Preset CONE_3RD_STAGE_PRESET = new Preset(3.778, 1.098);
+        public static final Preset CONE_3RD_STAGE_PRESET = new Preset(3.768, 1.098);
         public static final Preset CUBE_2ND_STAGE_PRESET = new Preset(3.306, 0.552);
         public static final Preset CUBE_3RD_STAGE_PRESET = new Preset(3.600, 1.063);   
         // public static final Preset SINGLE_SUBSTATION_CUBE = new Preset(1.85, 0);
@@ -277,7 +277,7 @@ public final class Constants {
         public static final int kIntakePort = 22; // ??
         public static final double kMaxIntakeSpeed = 0.5; // ?? 0.4
         public static final double kMaxOuttakeSpeed = -0.3; // ??
-        public static final double kHoldSpeed = 0.06; //THIS ONE
+        public static final double kHoldSpeed = 0.09; //THIS ONE
 
         public static double kSpeedUpFailTime = 0.75; //seconds it tries to speed up
         public static double kOutFailTime = 0.75; //seconds it tries to outtake
@@ -434,9 +434,8 @@ public final class Constants {
     }
 
     public static final class lightstripConstants {
-        public static int redPort = 1;
-        public static int greenPort = 2;
-        public static int bluePort = 0;
+        public static int candlePort = 37;
+        public static int ledCount = 150;
 
         public static LedState defaultState = new LedState(255, 0, 0, "Solid");
         public static TempLedState successSignal = new TempLedState(0, 255, 0, "Solid", 2);
