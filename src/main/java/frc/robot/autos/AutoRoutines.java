@@ -162,6 +162,51 @@ public final class AutoRoutines {
     );
   }
 
+
+  public CommandBase blueNoTurnAuto() {
+    PathPlannerTrajectory trajectory = PathPlanner.loadPath("cone_cube_noturn", 3.0, 4.0);
+    
+    HashMap<String, Command> eventMap = new HashMap<>();
+    eventMap.put("intakeDown", macros.setCubeMode().andThen(macros.cubeGroundIntake()).andThen(macros.intake()));
+    eventMap.put("stow", macros.stow());
+    eventMap.put("prepareScore", macros.cube3rdStage());
+
+    FollowPathWithEvents grabCubeandPrepareToScore = new FollowPathWithEvents(
+      baseSwerveCommand(trajectory, true),
+      trajectory.getMarkers(), 
+      eventMap);
+
+    return Commands.sequence(
+      cone3rdAuto(),
+      grabCubeandPrepareToScore,
+      macros.outtake(),
+      macros.stow()
+    );
+  }
+
+  public CommandBase redNoTurnAuto() {
+    PathPlannerTrajectory trajectory = PathPlanner.loadPath("cone_cube_noturn", 3.0, 4.0);
+    trajectory = PathPlannerTrajectory.transformTrajectoryForAlliance(trajectory, DriverStation.Alliance.Red);
+    
+    HashMap<String, Command> eventMap = new HashMap<>();
+    eventMap.put("intakeDown", macros.setCubeMode().andThen(macros.cubeGroundIntake()).andThen(macros.intake()));
+    eventMap.put("stow", macros.stow());
+    eventMap.put("prepareScore", macros.cube3rdStage());
+
+    FollowPathWithEvents grabCubeandPrepareToScore = new FollowPathWithEvents(
+      baseSwerveCommand(trajectory, true),
+      trajectory.getMarkers(), 
+      eventMap);
+
+    return Commands.sequence(
+      cone3rdAuto(),
+      grabCubeandPrepareToScore,
+      macros.outtake(),
+      macros.stow()
+    );
+  }
+
+
   /*public CommandBase testAuto() {
     PathPlannerTrajectory trajectory = PathPlanner.loadPath("Test", 1.5, 1.75);
     trajectory = PathPlannerTrajectory.transformTrajectoryForAlliance(trajectory, DriverStation.Alliance.Red);

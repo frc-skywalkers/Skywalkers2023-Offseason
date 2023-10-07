@@ -163,8 +163,8 @@ public final class Constants {
     public static final class Presets {
         public static final Preset STOW_PRESET = new Preset(2.5, 0); // done
         // public static final Preset GROUND_INTAKE_PRESET = new Preset(-0.19, 0.10); // don't use
-        public static final Preset GROUND_INTAKE_CONE_PRESET = new Preset(3.909, 0.0483);     
-        public static final Preset GROUND_INTAKE_CUBE_PRESET = new Preset(4.26, 0.0874); // done
+        public static final Preset GROUND_INTAKE_CONE_PRESET = new Preset(3.88, 0.0483);     
+        public static final Preset GROUND_INTAKE_CUBE_PRESET = new Preset(4.245, 0.0874); // done
         public static final Preset SUBSTATION_INTAKE_CONE_PRESET = new Preset(3.875, 0.995);
         // public static final Preset SUBSTATION_INTAKE_PRESET = new Preset(0.0, 1.13);
         public static final Preset SUBSTATION_INTAKE_CUBE_PRESET = new Preset(3.68, 0.85);
@@ -275,7 +275,7 @@ public final class Constants {
 
     public static final class IntakeConstants {
         public static final int kIntakePort = 22; // ??
-        public static final double kMaxIntakeSpeed = 0.5; // ?? 0.4
+        public static final double kMaxIntakeSpeed = 0.65; // ?? 0.4
         public static final double kMaxOuttakeSpeed = -0.3; // ??
         public static final double kHoldSpeed = 0.09; //THIS ONE
 
