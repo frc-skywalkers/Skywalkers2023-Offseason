@@ -114,6 +114,9 @@ public class RobotContainer {
         
         m_Chooser.addOption("BLUE 2 Piece Auto", autoRoutines.blueConeCubeAuto());
         m_Chooser.addOption("RED 2 Piece Auto", autoRoutines.redConeCubeAuto());
+
+        m_Chooser.addOption("BLUE no turn Auto", autoRoutines.blueNoTurnAuto());
+        m_Chooser.addOption("RED no turn Auto", autoRoutines.redNoTurnAuto());
         
          
         SmartDashboard.putData(m_Chooser);
@@ -159,7 +162,8 @@ public class RobotContainer {
         driverJoystick.leftBumper().onTrue(Commands.runOnce(() -> swerve.stopModules(), swerve));
         driverJoystick.rightBumper().onTrue(Commands.runOnce(swerve::stopModules, swerve));
 
-        driverJoystick.leftTrigger().onTrue(Commands.runOnce(() -> swerve.slowmode = true));
+        driverJoystick.leftTrigger().whileTrue(Commands.runOnce(() -> swerve.slowmode = true)); 
+        driverJoystick.leftTrigger().whileFalse(Commands.runOnce(() -> swerve.slowmode = false)); //needed?
 
         /*
 
