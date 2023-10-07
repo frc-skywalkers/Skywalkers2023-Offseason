@@ -36,8 +36,6 @@ public class Lightstrip extends SubsystemBase {
     defaultTimer.reset();
     defaultTimer.start();
 
-    isDefault = false;
-
     CANdleConfiguration config = new CANdleConfiguration();
     config.stripType = LEDStripType.RGB;
     config.brightnessScalar = 0.75;
@@ -46,6 +44,10 @@ public class Lightstrip extends SubsystemBase {
 
   @Override
   public void periodic() {
+    if(isDefault) {
+      return;
+    }
+
     if(tempColor != null) {
       if(tempColor.getSeconds() < tempTimer.get()) {
         tempColor = null;
@@ -69,11 +71,11 @@ public class Lightstrip extends SubsystemBase {
   }
 
   public void setDefault(boolean defaultState) {
-    /*isDefault = defaultState;
+    isDefault = defaultState;
 
     if(isDefault) {
       candle.animate(rainbowAnim);
-    }*/
+    }
   }
 
   private LedState toLedState(TempLedState state) {
@@ -126,7 +128,7 @@ public class Lightstrip extends SubsystemBase {
   }
 
   public void tempColor(TempLedState state) {
-    tempColor = state;
+    tempColor = state;                        
     resetTemp();
   }
 

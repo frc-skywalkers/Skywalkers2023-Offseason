@@ -106,6 +106,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public void holdObject() {
     intake.setVoltage(IntakeConstants.kHoldSpeed * 12.0000 * mode.multiplier);
+    intakeSpeed = 0;
   }
 
   public void setMode(Mode m) {
@@ -131,9 +132,17 @@ public class IntakeSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     if(mode == Mode.CONE) {
-      lightstrip.setColor(lightstripConstants.coneIntake);
+      if(intakeSpeed != 0) {
+        lightstrip.setColor(lightstripConstants.coneIntaking);
+      } else {
+        lightstrip.setColor(lightstripConstants.coneIntake);
+      }
     } else if(mode == Mode.CUBE) {
-      lightstrip.setColor(lightstripConstants.cubeIntake);
+      if(intakeSpeed != 0) {
+        lightstrip.setColor(lightstripConstants.cubeIntake);
+      } else {
+        lightstrip.setColor(lightstripConstants.cubeIntaking);
+      }
     }
 
     SmartDashboard.putNumber("current", getActualCurrent());

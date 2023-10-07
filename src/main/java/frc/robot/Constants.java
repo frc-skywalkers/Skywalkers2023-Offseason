@@ -438,9 +438,11 @@ public final class Constants {
         public static int ledCount = 150;
 
         public static LedState defaultState = new LedState(255, 0, 0, "Solid");
-        public static TempLedState successSignal = new TempLedState(0, 255, 0, "Solid", 2);
+        public static TempLedState successSignal = new TempLedState(0, 255, 0, "Solid1", 2);
         public static LedState coneIntake = new LedState(255, 200, 0, "Solid");
         public static LedState cubeIntake = new LedState(195, 0, 255, "Solid");
+        public static LedState coneIntaking = new LedState(255, 200, 0, "Fast Blink");
+        public static LedState cubeIntaking = new LedState(195, 0, 255, "Fast Blink");
     }
 
     /*

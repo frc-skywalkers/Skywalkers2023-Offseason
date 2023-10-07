@@ -45,7 +45,7 @@ public class RobotContainer {
     private final SwerveSubsystem swerve = new SwerveSubsystem();
     public final ProfiledPIDElevator elevator = new ProfiledPIDElevator();
     public final ArmSubsystem arm = new ArmSubsystem();
-    private final Lightstrip lightstrip = new Lightstrip();
+    public final Lightstrip lightstrip = new Lightstrip();
     private final IntakeSubsystem intake = new IntakeSubsystem(lightstrip);
     private final Limelight limelight = new Limelight();
     private final AutoRoutines autoRoutines = new AutoRoutines(swerve, elevator, arm, intake, limelight, lightstrip);
