@@ -42,7 +42,7 @@ public class OuttakePiece extends CommandBase {
   @Override
   public void execute() {
     if(intake.intakeEmpty()) {
-      //new WaitCommand(0.5); //sus
+      //new WaitCommand(1); //sus
       intake.stop();
       finished = true;
     } else {

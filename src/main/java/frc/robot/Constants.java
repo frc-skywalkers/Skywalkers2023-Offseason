@@ -13,7 +13,7 @@ import frc.robot.lightstrip.LedState;
 import frc.robot.lightstrip.TempLedState;
 
 public final class Constants {
-    public static final double stickDeadband = 0.1;
+    public static final double stickDeadband = 0.13;
 
     public static final class Swerve {
         public static final int pigeonID = 13;
@@ -164,7 +164,7 @@ public final class Constants {
         public static final Preset STOW_PRESET = new Preset(2.5, 0); // done
         // public static final Preset GROUND_INTAKE_PRESET = new Preset(-0.19, 0.10); // don't use
         public static final Preset GROUND_INTAKE_CONE_PRESET = new Preset(3.88, 0.0483);     
-        public static final Preset GROUND_INTAKE_CUBE_PRESET = new Preset(4.245, 0.0874); // done
+        public static final Preset GROUND_INTAKE_CUBE_PRESET = new Preset(4.06, 0.067); // done
         public static final Preset SUBSTATION_INTAKE_CONE_PRESET = new Preset(3.875, 0.995);
         // public static final Preset SUBSTATION_INTAKE_PRESET = new Preset(0.0, 1.13);
         public static final Preset SUBSTATION_INTAKE_CUBE_PRESET = new Preset(3.68, 0.85);
@@ -269,21 +269,21 @@ public final class Constants {
     
         public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond * 5.000 / 5.0000; // ?????
         public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = kPhysicalMaxAngularSpeedRadiansPerSecond/3; //????
-        public static double kslowmode = 0.6;
+        public static double kslowmode = 0.4;
 
     }
 
     public static final class IntakeConstants {
         public static final int kIntakePort = 22; // ??
-        public static final double kMaxIntakeSpeed = 0.65; // ?? 0.4
-        public static final double kMaxOuttakeSpeed = -0.3; // ??
-        public static final double kHoldSpeed = 0.09; //THIS ONE
+        public static final double kMaxIntakeSpeed = 0.75; // ?? 0.4
+        public static final double kMaxOuttakeSpeed = -0.6; // ??
+        public static final double kHoldSpeed = 0.18; //THIS ONE, 0.09
 
         public static double kSpeedUpFailTime = 0.75; //seconds it tries to speed up
         public static double kOutFailTime = 0.75; //seconds it tries to outtake
 
-        public static double conePieceHeldThreshold = 20;
-        public static double cubePieceHeldThreshold = 20;
+        public static double conePieceHeldThreshold = 15; //20
+        public static double cubePieceHeldThreshold = 12; //20
         public static boolean differentialIntake = true;
         public static int tofPort = 15;
     

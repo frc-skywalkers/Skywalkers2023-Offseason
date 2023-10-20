@@ -212,7 +212,7 @@ public class Macros {
   }
 
   public CommandBase outtake(Mode m) {
-    return new OuttakePiece(intake, m).withTimeout(1);
+    return new OuttakePiece(intake, m).withTimeout(2);
   }
 
   /*

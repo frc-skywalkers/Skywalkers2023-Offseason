@@ -68,7 +68,7 @@ public class SwerveSubsystem extends SubsystemBase {
     private final Limelight camera;
     private final SwerveDriveOdometry odometer = new SwerveDriveOdometry(DriveConstants.kDriveKinematics, new Rotation2d(0), getModulePositions());
 
-  private boolean fieldOriented = true;
+  public boolean fieldOriented = true;
 
   private final SwerveDrivePoseEstimator poseEstimator;
 
@@ -117,6 +117,10 @@ public class SwerveSubsystem extends SubsystemBase {
     return imu.getRoll();
   }
 
+  public double getPitch() {
+    return imu.getPitch();
+  }
+
   public Rotation2d getRotation2d() {
     return Rotation2d.fromDegrees(getHeading());
   }
@@ -145,6 +149,8 @@ public class SwerveSubsystem extends SubsystemBase {
     Dashboard.Swerve.Debugging.putNumber("Robot X Location", getPose().getTranslation().getX());
     Dashboard.Swerve.Debugging.putNumber("Robot Y Location", getPose().getTranslation().getY());
     Dashboard.Swerve.Debugging.putNumber("Robot Heading", getHeading());
+
+    Dashboard.Swerve.Debugging.putNumber("robot pitch", getPitch());
 
     //Pose2d estimatedPose = camera.campose().toPose2d();
 

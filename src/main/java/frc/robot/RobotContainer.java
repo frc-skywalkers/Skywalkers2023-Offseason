@@ -88,6 +88,8 @@ public class RobotContainer {
         );
         */
 
+        swerve.fieldOriented=true;
+
         elevator.setDefaultCommand(Commands.run(() -> {
             double speed = -operatorJoystick.getLeftY() * ElevatorConstants.kMaxElevatorSpeed;
             elevator.setSpeed(speed);
@@ -98,7 +100,6 @@ public class RobotContainer {
             speed = Math.abs(speed) > OIConstants.kDeadband ? speed : 0.0;
             arm.setSpeed(speed);
             }, arm).unless(arm::isEnabled)); //.unless(arm::isEnabled)
-        
         
         //m_Chooser.setDefaultOption("3rd Stage Cube Balance", autoRoutines.chargingStation());
         m_Chooser.setDefaultOption("3rd Stage Cube", autoRoutines.cube3rdAuto());
@@ -153,8 +154,9 @@ public class RobotContainer {
         /* Driver Buttons */
         //zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
 
+
         driverJoystick.y().onTrue(Commands.runOnce(() -> swerve.reset(), swerve));
-        driverJoystick.b().onTrue(Commands.runOnce(() -> swerve.toggleField(), swerve));
+        //driverJoystick.b().onTrue(Commands.runOnce(() -> swerve.toggleField(), swerve));
 
         //driverJoystick.x().onTrue(Commands.runOnce(() -> s_Swerve.setHeading(180.000), s_Swerve));
         driverJoystick.x().onTrue(Commands.runOnce(() -> swerve.setHeading(180.000), swerve));
@@ -162,8 +164,8 @@ public class RobotContainer {
         driverJoystick.leftBumper().onTrue(Commands.runOnce(() -> swerve.stopModules(), swerve));
         driverJoystick.rightBumper().onTrue(Commands.runOnce(swerve::stopModules, swerve));
 
-        driverJoystick.leftTrigger().whileTrue(Commands.runOnce(() -> swerve.slowmode = true)); 
-        driverJoystick.leftTrigger().whileFalse(Commands.runOnce(() -> swerve.slowmode = false)); //needed?
+        driverJoystick.leftTrigger().whileTrue(Commands.runOnce(() -> swerve.slowmode = true)); //
+        driverJoystick.leftTrigger().whileFalse(Commands.runOnce(() -> swerve.slowmode = false)); 
 
         /*
 
