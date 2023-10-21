@@ -163,7 +163,7 @@ public final class Constants {
     public static final class Presets {
         public static final Preset STOW_PRESET = new Preset(2.5, 0); // done
         // public static final Preset GROUND_INTAKE_PRESET = new Preset(-0.19, 0.10); // don't use
-        public static final Preset GROUND_INTAKE_CONE_PRESET = new Preset(3.88, 0.0483);     
+        public static final Preset GROUND_INTAKE_CONE_PRESET = new Preset(3.9715, 0.049294);     
         public static final Preset GROUND_INTAKE_CUBE_PRESET = new Preset(4.06, 0.067); // done
         public static final Preset SUBSTATION_INTAKE_CONE_PRESET = new Preset(3.875, 0.995);
         // public static final Preset SUBSTATION_INTAKE_PRESET = new Preset(0.0, 1.13);
@@ -275,14 +275,14 @@ public final class Constants {
 
     public static final class IntakeConstants {
         public static final int kIntakePort = 22; // ??
-        public static final double kMaxIntakeSpeed = 0.75; // ?? 0.4
+        public static final double kMaxIntakeSpeed = 0.7; // ?? 0.4
         public static final double kMaxOuttakeSpeed = -0.6; // ??
-        public static final double kHoldSpeed = 0.18; //THIS ONE, 0.09
+        public static final double kHoldSpeed = 0.07; //THIS ONE, 0.09
 
         public static double kSpeedUpFailTime = 0.75; //seconds it tries to speed up
         public static double kOutFailTime = 0.75; //seconds it tries to outtake
 
-        public static double conePieceHeldThreshold = 15; //20
+        public static double conePieceHeldThreshold = 12; //20
         public static double cubePieceHeldThreshold = 12; //20
         public static boolean differentialIntake = true;
         public static int tofPort = 15;
