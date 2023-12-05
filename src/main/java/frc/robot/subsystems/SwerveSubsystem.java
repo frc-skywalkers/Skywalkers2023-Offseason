@@ -4,7 +4,13 @@
 
 package frc.robot.subsystems;
 
+import java.io.IOException;
+
 import com.ctre.phoenix.sensors.Pigeon2;
+
+import edu.wpi.first.apriltag.AprilTagFieldLayout;
+import edu.wpi.first.apriltag.AprilTagFieldLayout.OriginPosition;
+import edu.wpi.first.apriltag.AprilTagFields;
 
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
@@ -71,6 +77,7 @@ public class SwerveSubsystem extends SubsystemBase {
   public boolean fieldOriented = true;
 
   private final SwerveDrivePoseEstimator poseEstimator;
+  private AprilTagFieldLayout layout;
 
   private double resetX = 0.00;
   private double resetY = 0.00;
@@ -82,6 +89,12 @@ public class SwerveSubsystem extends SubsystemBase {
   
 
   public SwerveSubsystem() {
+    try{
+      layout = AprilTagFieldLayout.loadFromResource(AprilTagFields.k2023ChargedUp.m_resourceFile);
+    }catch(IOException e) {
+      //DriverStation.reportError("Failed to load AprilTagFieldLayout", e.getStackTrace());
+      layout = null;
+    }
     camera = new Limelight();
     poseEstimator = new SwerveDrivePoseEstimator(DriveConstants.kDriveKinematics, getRotation2d(), getModulePositions(), new Pose2d(), VecBuilder.fill(0.05, 0.05, Units.degreesToRadians(5)), VecBuilder.fill(0.5, 0.5, Units.degreesToRadians(30)));
 
@@ -126,11 +139,13 @@ public class SwerveSubsystem extends SubsystemBase {
   }
 
   public Pose2d getPose() {
-    return odometer.getPoseMeters();
+    //return odometer.getPoseMeters();
+    return poseEstimator.getEstimatedPosition();
   }
 
   public void resetOdometry(Pose2d pose) {
     odometer.resetPosition(getRotation2d(), getModulePositions(), pose);
+    poseEstimator.resetPosition(getRotation2d(), getModulePositions(), pose);
     // resetX = pose.getX();
     // resetY = pose.getY();
     resetCount++;
@@ -142,7 +157,11 @@ public class SwerveSubsystem extends SubsystemBase {
 
     // recalibrate();
 
+    //pseudocode for the "latency" component of WPILib' addVisionMeasurement():
+    poseEstimator.addVisionMeasurement(getVisionPose(), Timer.getFPGATimestamp() - 0.3);
+
     odometer.update(getRotation2d(), getModulePositions());
+    poseEstimator.update(getRotation2d(), getModulePositions());
 
     Dashboard.Swerve.Driver.putString("Robot Location", getPose().getTranslation().toString());
 
@@ -166,6 +185,11 @@ public class SwerveSubsystem extends SubsystemBase {
     // Dashboard.Swerve.Debugging.putNumber("Robot Y Reset", resetY);
 
   } 
+
+  public Pose2d getVisionPose(){
+    var camPose = camera.campose();
+    return camPose.toPose2d();
+  }
 
   public void stopModules() {
     frontLeft.stop();
